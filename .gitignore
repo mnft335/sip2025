@@ -27,7 +27,7 @@
 *.fls
 *.bcf
 *.xml
-*.pdf
+main.pdf
 !figures/*.pdf
 !main.pdf
 
