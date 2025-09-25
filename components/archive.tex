@@ -1,0 +1,18 @@
+% Proximal operator of the indicator function associated with the box constraint
+\begin{equation}
+    \element{\prox{\gamma, \indRange}{\x}}{i} = 
+    \begin{cases}
+        \underline{\mu}, & \caseif{\element{\x}{i} < \underline{\mu}}, \\
+        \overline{\mu}, & \caseif{\element{\x}{i} > \overline{\mu}}, \\
+        \element{\x}{i}, & \text{otherwise}.
+    \end{cases}
+\end{equation}
+
+% Proximal operator of the indicator function associated with the L2 ball constraint
+\begin{equation}
+    \prox{\gamma, \indBall}{\x} = 
+    \begin{cases}
+        r \frac{\x}{\ltwo{\x}}, & \caseif{\ltwo{\x} > r}, \\
+        \x, & \text{otherwise}.
+    \end{cases}
+\end{equation}

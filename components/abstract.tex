@@ -1,0 +1,8 @@
+Graph signal recovery is a central task in graph signal processing, with applications across diverse networked data domains. 
+Graph Laplacian regularization (GLR) is a well-established approach for smooth signal recovery, but it heavily relies on an assumption that rarely holds: edge weights accurately reflect signal characteristics.
+Graph total variation (GTV) offers more robustness to weight uncertainties but under-penalizes small differences on reliable edges, limiting its effectiveness.
+We propose a novel infimal convolution–based regularizer that adaptively combines the strengths of GLR and GTV. 
+Reliable edges with small signal differences are effectively handled by the quadratic component, while unreliable edges with larger differences are better explained by the $\ell_{1}$ component. 
+This mechanism enables robust recovery in the presence of edge weight uncertainties without sacrificing performance when weights are accurate.
+We formulate recovery as a convex optimization problem and develop an efficient solver via a preconditioned primal–dual splitting method. 
+Experiments on graph signal recovery with perturbed edge weights show that our approach consistently outperforms GLR and GTV, achieving robust and accurate recovery under uncertainty.

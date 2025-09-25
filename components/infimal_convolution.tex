@@ -1,0 +1,8 @@
+The infimal convolution \cite{infimal_convolution} of two functions $f, g \in \setCCP{d}$ is the function $f \square g \in \setCCP{d}$ defined by
+\begin{equation}
+    \parentheses{f \square g} \parentheses{\u} = \infimum{\C \u = \p + \q} f \parentheses{\p} + g \parentheses{\q},
+\end{equation}
+where $\C$ can be any matrix.\footnote{We introduce the matrix $\C$ for generality, whereas the original definition only considers the case where $\C$ is the identity matrix.}
+Intuitively, the infimal convolution finds the optimal separation of the input $\C \u$ into two components $\p$ and $\q$ by automatically balancing their contributions, which are characterized by $f$ and $g$.
+This perspective has been incorporated in several regularization designs to capture latent properties without requiring prior knowledge of their relative magnitudes.
+For instance, the total generalized variation (TGV) \cite{bredies2010total} and its extension to graph signals \cite{ono2015total} employ infimal convolution of the first- and second-order total variation (TV) terms.

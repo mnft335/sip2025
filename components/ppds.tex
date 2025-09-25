@@ -1,0 +1,24 @@
+P-PDS \cite{pock2011diagonal} can solve convex problems in the form: 
+\begin{equation}
+    \label{equation:pds}
+    \begin{split}
+        \minimum{\x_i, \y_j} &\summation{i = 1}{N} f_i \parentheses{\x_i} + \summation{j = 1}{M} g_j \parentheses{\y_j} \\
+        \st                   &\forall j \in \set{1, \dots, M}, \ \y_j = \summation{i = 1}{N} \Lcal_{j, i} \parentheses{\x_i},
+    \end{split}
+\end{equation}
+where $f_i \in \setCCP{n_i}$ and $g_j \in \setCCP{m_j}$ are proximable, and $\defOp{\Lcal_{j, i}}{\mathbb{R}^{n_i}}{\mathbb{R}^{m_j}}$ are bounded.
+This algorithm alternates between updating the primal variables $\x_i$ and the dual variables $\z_j$, which are associated with the equality constraint on $\y_j$.
+The sequence of the updated variables converges to the primal-dual solution of Problem (\ref{equation:pds}) with appropriate stepsizes.
+A recent study \cite{naganuma2023variable} proposed three variable-wise stepsize designs based on the (upper bound of) operator norms $\opNorm{\Lcal_{j, i}}$ that guarantee the convergence, with a practical advantage of fast convergence.
+Let $\rho_i, \gamma_j > 0$ be the stepsizes for $\x_i$ and $\z_j$ determined by this method, respectively.
+Then, P-PDS iterates the following updates, with an intermediate variable $\widetilde{\z}_j$:
+\begin{equation}
+	\label{algo:P-PDS}
+	\AlgoLfloor{
+		\begin{array}{l}
+        \iter{\x_i}{n + 1} = \prox{\rho_i f_i}{\iter{\x_i}{n} - \rho_i \summation{j = 1}{M} \adjoint{\Lcal_{j, i}} \parentheses{\iter{\z_j}{n}}}, \\
+        \widetilde{\z}_j = \iter{\z_j}{n} + \gamma_j \summation{i = 1}{N} \Lcal_{j, i} \parentheses{2 \iter{\x_i}{n + 1} - \iter{\x_i}{n}}, \\
+        \iter{\z_j}{n + 1} = \widetilde{\z}_j - \gamma_j \prox{\gamma_j^{-1} g_j}{\gamma_j^{-1} \widetilde{\z}_j}. \\
+        \end{array}
+	}.
+\end{equation}

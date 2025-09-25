@@ -1,0 +1,11 @@
+Vectors are denoted by bold lowercase letters, with the $i$-th element of a vector $\x$ as $x_i$.
+Matrices are denoted by bold uppercase letters, with the transpose of a matrix $\X$ as $\transpose{\X}$.
+Linear operators are denoted by calligraphic uppercase letters, with the adjoint of a linear operator $\Lcal$ as $\adjoint{\Lcal}$.
+The set of all proper lower semicontinuous convex functions over $\euclidean{m}$ is denoted by $\setCCP{m}$.
+The $\ell_p$-norm of a vector $\x \in \euclidean{m}$ is defined as $\lVert \x \rVert_p = (\summationText{i} \abs{x_i}^p)^{1/p} \in \setCCP{m}$ for $p \geq 1$, and the operator norm of a linear operator $\Lcal$ is defined as $\opNorm{\Lcal} = \supremum{\x \neq 0} \ltwo{\Lcal \x} / \ltwo{\x}$.
+The indicator function $\indicator{C} \in \setCCP{m}$ of a set $C \subseteq \euclidean{m}$ is defined as $\indicator{C}(\x) = 0$ if $\x \in C$ and $+\infty$ otherwise.
+The proximity operator $\defOp{\prox{\gamma f}{\x}}{\euclidean{m}}{\euclidean{m}}$ of a function $f \in \setCCP{m}$ with a parameter $\gamma > 0$ is defined as
+\begin{equation}
+    \prox{\gamma f}{\x} = \argmin{\y} f \parentheses{\y} + \frac{1}{2 \gamma} \ltwoSquared{\y - \x}.
+\end{equation}
+We call a function proximable if its proximity operator has a closed form solution or can be efficiently computed.

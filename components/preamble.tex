@@ -1,0 +1,112 @@
+\usepackage{sips}
+\usepackage{latexsym}
+\usepackage[dvips]{graphicx}
+% \OnlyEnglishtrue
+
+\usepackage{amsmath, amsfonts, mathtools, hyperref, cite}
+\usepackage[ruled, noend]{algorithm2e}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{subcaption}
+
+% Change only caption headings to English (keep Japanese title/author)
+\renewcommand{\figurename}{Figure}
+\renewcommand{\tablename}{Table}
+
+% Adjust the margin in algorithms
+\setlength{\algomargin}{0pt}
+
+% Adjust the indentation in algorithms
+\SetInd{0.15em}{0.25em}
+
+% Adjust the caption indentation in algorithms
+\SetAlCapHSkip{0pt}
+
+% Adjust line spacing (1.0 = single spacing, 0.9 = tighter, 1.2 = looser)
+\linespread{0.9}
+
+% Bibliography title
+\renewcommand{\refname}{REFERENCES}
+
+% Make bibliography text smaller by redefining the environment
+\let\oldbibliography\thebibliography
+\renewcommand{\thebibliography}[1]{\small \oldbibliography{#1}}
+
+% Matrices
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\D}{\mathbf{D}}
+\newcommand{\I}{\mathbf{I}}
+\renewcommand{\L}{\mathbf{L}}
+\newcommand{\A}{\mathbf{A}}
+\newcommand{\B}{\mathbf{B}}
+\newcommand{\W}{\mathbf{W}}
+\newcommand{\X}{\mathbf{X}}
+\newcommand{\PHI}{\mathbf{\Phi}}
+
+% Vectors
+\newcommand{\n}{\mathbf{n}}
+\newcommand{\p}{\mathbf{p}}
+\newcommand{\q}{\mathbf{q}}
+\renewcommand{\u}{\mathbf{u}}
+\renewcommand{\v}{\mathbf{v}}
+\newcommand{\w}{\mathbf{w}}
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\y}{\mathbf{y}}
+\newcommand{\z}{\mathbf{z}}
+
+\newcommand{\zeroVector}{\mathbf{0}}
+\newcommand{\trueSignal}{\overline{\mathbf{u}}}
+
+% Sets
+\newcommand{\range}{R_{\underline{\mu}, \overline{\mu}}}
+\newcommand{\ball}{B_{\v, r}}
+\newcommand{\euclidean}[1]{\mathbb{R}^{#1}}
+\newcommand{\setCCP}[1]{\Gamma_0 \parentheses{\euclidean{#1}}}
+\newcommand{\set}[1]{\{ #1 \}}
+\newcommand{\defSet}[2]{\{ #1 \mid #2 \}}
+
+% Functions
+\newcommand{\indicator}[1]{\iota_{#1}}
+\newcommand{\indRange}{\indicator{\range}}
+\newcommand{\indBall}{\indicator{\ball}}
+
+\newcommand{\lone}[1]{\lVert #1 \rVert_1}
+\newcommand{\ltwo}[1]{\lVert #1 \rVert_2}
+\newcommand{\ltwoSquared}[1]{\lVert #1 \rVert_2^2}
+\newcommand{\opNorm}[1]{\lVert #1 \rVert_\text{op}}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\minFun}[2]{\min \parentheses{{#1}, \ {#2}}}
+\newcommand{\maxFun}[2]{\max \parentheses{{#1}, \ {#2}}}
+
+\DeclareMathOperator{\sign}{sign}
+\newcommand{\signFun}[1]{\sign \parentheses{#1}}
+
+\DeclareMathOperator{\GLR}{GLR}
+\DeclareMathOperator{\GTV}{GTV}
+
+% Operators
+\newcommand{\Lcal}{\mathcal{L}}
+
+\DeclareMathOperator{\proxop}{prox}
+\newcommand{\prox}[2]{\proxop_{#1} ({#2})}
+
+% Other mathematical operations
+\newcommand{\argmin}[1]{\mathop{\mathrm{argmin}}\limits_{#1} \ \ }
+\newcommand{\infimum}[1]{\inf_{#1} \ }
+\newcommand{\supremum}[1]{\sup_{#1} \ }
+\newcommand{\minimum}[1]{\min_{#1} \ \ }
+\newcommand{\summation}[2]{\sum_{#1}^{#2}}
+\newcommand{\summationText}[1]{\sum\nolimits_{#1}}
+\newcommand{\transpose}[1]{#1^{\top}}
+\newcommand{\adjoint}[1]{#1^{\ast}}
+
+% Unsorted
+\newcommand{\st}{\text{s.t.} \ \ }
+\newcommand{\placeholder}{\cdot}
+\newcommand{\card}[1]{\lvert #1 \rvert}
+\newcommand{\parentheses}[1]{(#1)}
+\newcommand{\iter}[2]{#1^{(#2)}}
+\newcommand{\defOp}[3]{{#1} \colon {#2} \to {#3}}
+\newcommand{\element}[2]{[#1]_{#2}}
+\newcommand{\AlgoLfloor}[1]{\left\lfloor #1 \right}

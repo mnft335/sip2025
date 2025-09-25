@@ -1,0 +1,16 @@
+\begin{table}[t]
+    \small
+    \caption{RMSEs averaged over $20$ independent runs, with the best and the second best performance highlighted by bolded and underlined, respectively. Our proposed regularizations consistently achieved better performances over GLR and GTV.}
+    \label{visuals:quantitative_results}
+    \centering
+    \begin{tabular}{c|cccc}
+        \toprule
+        Task & GLR & GTV & Ours (\ref{equation:proposed_1}) & Ours (\ref{equation:proposed_2}) \\
+        \midrule
+		Denoising	& $0.1757$ & $0.1640$ & $\underline{0.1629}$ & $\mathbf{0.1485}$ \\
+        Inpainting 	& $0.1714$ & $0.1848$ & $\underline{0.1697}$ & $\mathbf{0.1353}$ \\
+		+ noise 	& $0.2549$ & $0.2637$ & $\underline{0.2500}$ & $\mathbf{0.2300}$ \\
+
+        \bottomrule
+    \end{tabular}
+\end{table}

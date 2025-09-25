@@ -1,0 +1,16 @@
+\begin{algorithm}[t]
+\caption{P-PDS-based algorithm for solving Problem (\ref{equation:proposed_optimization})} 
+\label{algorithm:proposed}
+\SetAlgoNoLine
+\KwIn{$\iter{\u}{0}, \iter{\p}{0}, \iter{\z_1}{0}, \iter{\z_2}{0}$}
+\While{Stopping criteria are not met}{
+    $\iter{\u}{n + 1} \gets \prox{\rho_1 \indRange}{\iter{\u}{n} - \rho_1 (\PHI^\top \iter{\z_1}{n} + (\B^\top \A^\top) \iter{\z_2}{n})}$; \\
+    $\iter{\p}{n + 1} \gets \prox{\rho_2 \alpha \|\cdot\|_{1}}{\iter{\p}{n} + \rho_2 \A^\top \iter{\z_2}{n}}$; \\
+    $\widetilde{\z_1} \gets \iter{\z_1}{n} + \gamma_1 \PHI (2 \iter{\u}{n + 1} - \iter{\u}{n})$; \\
+    $\iter{\z_1}{n + 1} \gets \widetilde{\z_1} - \gamma_1 \prox{\gamma_1^{-1} \indBall}{\gamma_1^{-1} \widetilde{\z_1}}$; \\
+    $\widetilde{\z_2} \gets \iter{\z_2}{n} + \gamma_2 \big(\A \B (2 \iter{\u}{n + 1} - \iter{\u}{n}) - \A (2 \iter{\p}{n + 1} - \iter{\p}{n})\big)$; \\
+    $\iter{\z_2}{n + 1} \gets \widetilde{\z_2} - \gamma_2 \prox{\gamma_2^{-1} g}{\gamma_2^{-1} \widetilde{\z_2}}$; \\
+    $n \gets n + 1$; \\
+}
+\KwOut{$\iter{\u}{n}$}
+\end{algorithm}

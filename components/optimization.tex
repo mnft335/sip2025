@@ -1,0 +1,29 @@
+We develop an efficient algorithm for solving the proposed convex optimization (\ref{equation:proposed_optimization}) based on P-PDS with automatic stepsize selection.
+First, by eliminating $\q$ and introducing the indicator functions of $\range$ and $\ball$, Problem (\ref{equation:proposed_optimization}) can be reformulated as 
+\begin{align}
+    \begin{split}
+        \min_{\u, \p} \ &\indicator{\range}(\u) + \indicator{\ball}(\PHI \u) \\
+                        &+ \alpha \|\p\|_{1} + \beta g(\A \B \u - \A \p).
+    \end{split}
+\end{align}
+Then, by introducing auxiliary variables $\y_1$ and $\y_2$ to separate the composite matrices, it can be equivalently written as
+\begin{align}
+    \begin{split}
+        \min_{\u, \p} \ &\indicator{\range}(\u) + \indicator{\ball}(\y_1) + \alpha \|\p\|_{1} + \beta g(\y_2) \\
+        \text{s.t.} \ &\y_1 = \PHI \u, \quad \y_2 = \A \B \u - \A \p.
+    \end{split}
+\end{align}
+This formulation reduces to the form in Problem (\ref{equation:proposed_optimization}) by setting $\x_1 = \u$, $\x_2 = \p$, $f_1 = \indicator{\range}$, $f_2 = \indicator{\ball}$, $f_3 = \alpha \|\cdot\|_{1}$, $f_4 = \beta g(\cdot)$, $\Lcal_{1,1} = \PHI$, $\Lcal_{2,1} = \A \B$, and $\Lcal_{2,2} = \A$.
+All the functions are proper lower-semicontinuous convex and proximable, with the proximity operators:
+\begin{align}
+    &\element{\prox{\gamma \indRange}{\x}}{i} = \maxFun{\underline{\mu}}{\minFun{\overline{\mu}}{x_i}}, \\
+    &\prox{\gamma \indBall}{\x} = \v + \frac{\minFun{r}{\ltwo{\x - \v}}}{\ltwo{\x - \v}} \parentheses{\x - \v}, \\
+    &\element{\prox{\gamma \alpha \lone{\placeholder}}{\x}}{i} = \signFun{x_i} \cdot \maxFun{\abs{x_i} - \gamma \alpha}{0}, \\
+    &\prox{\gamma \beta \ltwo{\placeholder}}{\x} = \parentheses{1 - \frac{\gamma \beta}{\maxFun{\ltwo{\x}}{\gamma \beta}}} \x, \\
+    &\prox{\gamma \beta \ltwoSquared{\placeholder}}{\x} = \frac{1}{1 + 2 \gamma \beta} \x,
+\end{align} 
+where $\element{\placeholder}{i}$ denotes the $i$-th element of the outputs and $\text{sign} \parentheses{u_i}$ is $1$ for $u_i \ge 0$ and $-1$ otherwise.
+All the linear operators are real matrices and thus bounded, where their operator norms can be calculated as the maximum singular values.
+Consequently, Problem (\ref{equation:proposed_optimization}) can be solved by applying P-PDS, enjoying the automatic stepsize designs among the three frameworks mentioned earlier.
+The detailed flow of this algorithm is summarized in Algorithm \ref{algorithm:proposed}.
+\input{visuals/algorithm.tex}

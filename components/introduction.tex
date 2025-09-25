@@ -1,0 +1,34 @@
+Graph Signal Processing (GSP) provides a powerful framework for extending classical signal processing concepts to data residing on irregular domains represented by graphs~\cite{shuman2013emerging, sandryhaila2013discrete, ortega2018graph,leus2023graph}. 
+This perspective has enabled principled methods for analyzing and processing a wide variety of network-structured data, with applications ranging from sensor networks and transportation systems to neuroscience and social media analysis. 
+
+Among various problems studied in this field, \emph{graph signal recovery}---the recovery of signals defined on graph nodes from noisy, missing, or corrupted observations---is one of the most fundamental tasks. 
+Accurate and efficient recovery is critical not only as a stand-alone problem, but also as a building block for downstream tasks such as classification, clustering, and learning over graphs. 
+Consequently, a large body of research has been devoted to this topic~\cite{chen2015signal,onuki2016graph,qiu2017time,chen2021graph,chen2024manifold,yamagata2025robust}.
+
+Among various approaches to (undirected) graph signal recovery, one of the most widely used methods is graph Laplacian regularization (GLR) ~\cite{merris1994laplacian, ando2006learning}, which is designed for smooth graph signals.
+In simple denoising settings, this regularization admits a closed-form solution that can be interpreted as graph filtering~\cite{pang2017graph,zhang2019color}. 
+In more advanced recovery problems, it typically leads to convex optimization formulations~\cite{dinesh2020point}, which can be efficiently solved using proximal splitting methods~\cite{combettes2011proximal,parikh2014proximal}.
+
+A key premise behind GLR is that the given edge weights of the graph accurately reflect the underlying structure of the signal. 
+In practice, however, this assumption rarely holds. 
+Even when the graph topology is partially known, assigning accurate edge weights that capture the true similarity between nodes is notoriously difficult. 
+When the graph itself is learned from data, uncertainties in edge weights become even more pronounced. 
+For these reasons, the effectiveness of GLR is highly sensitive to inaccuracies in the graph structure.
+
+An alternative widely studied regularizer is the graph total variation (GTV) and its variants~\cite{chen2014signal,ono2015total,berger2017graph}, which penalize the $\ell_{1}$ norm of edge differences. 
+Since large differences across unreliable edges do not dominate the regularization term as strongly as in the quadratic Laplacian case, GTV can be seen as more robust to edge weight uncertainties. 
+However, this robustness comes at a cost: even on trustworthy edges where the signal should remain smooth, GTV often leaves behind small bumps, making it less effective than Laplacian regularization when the edge weights are accurate.
+
+This naturally leads to the following research question:  
+\emph{Can we design a regularization method that recovers the effectiveness of GLR when edge weights are accurate, while significantly improving robustness in the presence of edge weight uncertainties?}
+
+To address this question, we propose a novel regularization framework for graph signal recovery based on infimal convolution. 
+The contributions of this work are summarized as follows:
+\begin{itemize}
+    \item We introduce an infimal convolution-based regularizer that combines the strengths of GLR and GTV. 
+    The key mechanism is as follows: when an edge weight is reliable, the difference between the graph signal values at its endpoints tends to be small, in which case the $\ell_{2}$ evaluation yields a smaller function value. 
+    Conversely, when an edge weight is unreliable, the difference across its endpoints is likely to be relatively large, making the $\ell_{1}$ evaluation more favorable. 
+    As a result, the proposed regularizer automatically delegates smoothing to the $\ell_{2}$ component on trustworthy edges, while relying on the $\ell_{1}$ component for edges with uncertainties.
+    \item We formulate general graph signal recovery problems as convex optimization problems incorporating the proposed regularizer, and develop an efficient solver based on a preconditioned primal-dual splitting method~\cite{pock2011diagonal,naganuma2023variable}.
+\end{itemize}
+Through experiments on graph signal recovery with perturbed edge weights, we demonstrate that the proposed regularizer exhibits significantly more robust behavior than GLR and GTV under edge weight uncertainties.

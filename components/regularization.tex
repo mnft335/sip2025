@@ -1,0 +1,36 @@
+Our goal is to design a regularizer that inherits the advantages of both GLR and GTV while mitigating their individual limitations. 
+To this end, we leverage the infimal convolution of an $\ell_{2}$ (GLR-like) term and an $\ell_{1}$ (GTV-like) term. 
+The intuition is that reliable edges, where endpoint differences are small, are naturally handled by the $\ell_{2}$ term, whereas unreliable edges, where differences are relatively large, are better absorbed by the $\ell_{1}$ term. 
+This mechanism allows the regularizer to automatically adapt to the reliability of edge weights.
+
+We instantiate this idea in two variants:
+\begin{align}
+    \label{equation:proposed_1}
+    &\min_{\sqrt{\W} \D \u = \p + \q} \ \alpha \|\p\|_{1} + (1 - \alpha)\|\q\|_{2}^{2}, \\
+    \label{equation:proposed_2}
+    &\min_{\W \D \u = \p + \q} \ \alpha \|\p\|_{1} + (1 - \alpha)\|\D^\top \q\|_{2},
+\end{align}
+where $\alpha \in [0, 1]$ controls the balance between the two components.  
+
+The first form \eqref{equation:proposed_1} retains the exact GLR in its second term, while its first term resembles GTV but only partially incorporates $\sqrt{\W}$. 
+The second form \eqref{equation:proposed_2} recovers GTV in its first term, whereas its second term imitates GLR in a modified form. 
+We later investigate the impact of these design differences in the experiments.
+
+It is important to note that the above two forms are not equivalent to a
+simple convex linear combination of GLR and GTV. In a linear combination, the regularization takes the form
+\[
+\alpha \cdot \text{GLR}(u) + (1-\alpha)\cdot \text{GTV}(u),
+\]
+where each edge difference contributes simultaneously to both terms. In contrast, the infimal convolution  finds an
+optimal decomposition $\p + \q$ such that \emph{each edge contribution
+is adaptively assigned} to either the $\ell_1$ or the $\ell_{2}$ component.
+This separation enables edge-wise robustness, a property fundamentally
+different from globally weighted sums.
+
+For convenience, we express both variants in the following unified form
+\begin{equation}
+    \label{equation:unified_regularization}
+    \min_{\B \u = \p + \q} \ \alpha \|\p\|_{1} + \beta g(\A \q),
+\end{equation}
+where $\beta = 1 - \alpha$. 
+This reduces to \eqref{equation:proposed_1} when $\B = \sqrt{\W}\D$, $\A = \I$, and $g(\cdot) = \|\cdot\|_{2}^{2}$, and to \eqref{equation:proposed_2} when $\B = \W \D$, $\A = \D^\top$, and $g(\cdot) = \|\cdot\|_{2}$.

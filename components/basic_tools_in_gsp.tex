@@ -1,0 +1,24 @@
+We consider an undirected weighted graph $G = (V, E, \W)$ without self-loops, where $V = \set{v_1, \dots, v_{\card{V}}}$ is the set of $\card{V}$ vertices, $E = \set{e_{i,j} = \parentheses{v_i, v_j}}$ is the set of $\card{E}$ edges defined for some $i < j$, and $\W \in \euclidean{\card{E} \times \card{E}}$ is a diagonal matrix collecting weights $w_{i,j} > 0$ associated with $e_{i, j}$.
+The $G$ can be characterized by its (unnormalized) graph Laplacian $\L = \transpose{\D} \W \D \in \euclidean{|V| \times |V|}$, with the oriented incidence matrix $\D \in \mathbb{R}^{|E| \times |V|}$ defined by
+\begin{equation}
+    \D_{e_{i,j}, v_k} \coloneqq
+    \begin{cases}
+        -1, & \text{if } i = k, \\
+        1,  & \text{if } j = k, \\
+        0,  & \text{otherwise}.
+    \end{cases}
+\end{equation}
+
+A graph signal is a vector $\x \in \euclidean{\card{V}}$ with $x_i$ defined on a vertex $v_i$. 
+Two common measures of signal variation on $G$ are
+\begin{align}
+    \label{eq:glr}
+    \transpose{\x} \L \x &= \sum_{i,j} w_{i,j} (x_i - x_j)^2, \\
+    \label{eq:gtv}
+    \lone{\W \D \x} &= \sum_{i,j} w_{i,j} \abs{x_i - x_j}.
+\end{align}
+The first quantity corresponds to \emph{graph Laplacian regularization (GLR)}, which promotes global smoothness of the signal, while the second corresponds to \emph{graph total variation (GTV)}, which promotes piecewise smoothness. 
+
+GLR is highly effective when edge weights accurately reflect signal similarity, but it is sensitive to weight inaccuracies. 
+In contrast, GTV is more robust to uncertain edges since large discrepancies across unreliable connections do not dominate the regularization term. 
+However, this robustness comes at the expense of under-penalizing small but meaningful differences on reliable edges, limiting its effectiveness compared with GLR.

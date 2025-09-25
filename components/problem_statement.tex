@@ -1,0 +1,24 @@
+We consider the recovery of an underlying smooth graph signal $\trueSignal \in \mathbb{R}^{|V|}$ from a noisy and possibly incomplete observation $\v$. 
+The observation model is
+\begin{equation}
+    \v = \PHI \trueSignal + \n,
+\end{equation}
+where $\PHI \in \mathbb{R}^{K \times |V|}$ is a linear observation matrix and $\n \in \mathbb{R}^K$ denotes additive Gaussian noise.
+
+Incorporating the unified regularization in \eqref{equation:unified_regularization}, we formulate the recovery problem as the following constrained convex optimization:
+\begin{align}
+    \label{equation:proposed_optimization}
+    \begin{split}
+        \min_{\B \u = \p + \q} \ & \alpha \|\p\|_{1} + \beta g(\A \q) \\
+        \text{s.t.} \ & \u \in \range, \ \PHI \u \in \ball,
+    \end{split}
+\end{align}
+with the closed convex constraint sets
+\begin{align}
+    &\range \coloneqq \{ \u \in \mathbb{R}^{|V|} \mid \underline{\mu} \leq u_i \leq \overline{\mu} \}, \\
+    &\ball \coloneqq \{ \z \in \mathbb{R}^K \mid \|\z - \v\|_{2} \leq r \}.
+\end{align}
+
+The set $\range$ imposes box constraints reflecting prior knowledge of feasible signal ranges (or can be chosen sufficiently wide if such knowledge is unavailable). 
+The set $\ball$ enforces fidelity to the observations within an $\ell_2$ ball of radius $r \geq 0$ centered at $\v$. 
+Such constrained formulations are known to improve robustness and facilitate principled hyperparameter control~\cite{afonso2010augmented,ono2015signal,chierchia2015epigraphical,ono2017primal,ono2017l_}.

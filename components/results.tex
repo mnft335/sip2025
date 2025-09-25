@@ -1,0 +1,10 @@
+\input{visuals/quantitative_results.tex}
+Table \ref{visuals:quantitative_results} shows the RMSEs averaged over $20$ independent runs on each task and regularization, with the best and second best performance highlighted by bolded and underlined, respectively.
+Our proposed regularizations surpassed GLR and GTV across all tasks, validating their robust smoothness-promoting ability over GLR against inaccurate graph weights.
+In particular, the proposed method (\ref{equation:proposed_2}) consistently achieved the best performance, which implies the importance of incorporating the exact GTV in the error-tolerant term.
+
+Fig. \ref{visuals:qualitative_results} visualizes an example of recovery results on each method in the noiseless inpainting task, where the edges with corrupted weights are highlighted in thicker black.
+The first column shows the true signal in the upper and the observed signal in the lower, with the masked signal elements as cross symbols.
+In the other columns, the first row shows the recovered signals, and the second row highlights the error between the true and restored signals.
+This figure illustrates the assumptions that inspired our regularization design: GLR and GTV failed on different nodes, indicating their complementary advantages against weight errors.
+Our proposed regularizations successfully inherited these strengths, as they accurately restored the signal on nodes where GLR and GTV struggled.
